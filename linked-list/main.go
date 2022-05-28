@@ -12,6 +12,7 @@ type linkedList struct {
 	length int
 }
 
+// add new node to beginning of list
 func (l *linkedList) prepend(n *node) {
 	second := l.head
 	l.head = n
@@ -29,6 +30,7 @@ func (l linkedList) printListData() {
 	fmt.Printf("\n")
 }
 
+// delete node with a given a value
 func (l *linkedList) deleteWithValue(value int) {
 	if l.length == 0 {
 		return
@@ -40,13 +42,17 @@ func (l *linkedList) deleteWithValue(value int) {
 		return
 	}
 
+	// want to evalute next element so can delete node reference from current node
 	previousToDelete := l.head
+	// if the next value does not equal delete value, replace reference node
 	for previousToDelete.next.data != value {
+		//if the next node is the last node, then no node matches value
 		if previousToDelete.next.next == nil {
 			return
 		}
 		previousToDelete = previousToDelete.next
 	}
+	// once value matches replace next node with next next node and subtract length
 	previousToDelete.next = previousToDelete.next.next
 	l.length--
 }
